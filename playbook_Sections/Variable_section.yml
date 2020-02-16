@@ -1,0 +1,7 @@
+---
+- vars:
+   {
+   "package1": "httpd",
+   "package2": "git",
+   "package3": "docker"
+   }
