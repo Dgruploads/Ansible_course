@@ -1,0 +1,4 @@
+---
+- handlers:
+  name: service
+  service: name=httpd state=latest
