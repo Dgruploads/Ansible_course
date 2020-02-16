@@ -1,0 +1,10 @@
+---
+- name: 1. Install httpd
+  yum: name=httpd state=latest
+- name: 2. Install git
+  yum: name=git state=latest
+- name: 3. Install docker
+  yum: name=docker state=latest
+- name: 4. Copy index.html file
+  copy: src=/etc/ansible/index.html dest=/var/www/html
+  notify: service
