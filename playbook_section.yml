@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  vars:
+    {
+      "package1": "httpd",
+      "package2": "git",
+      "package3": "docker",
+      "index_file": "/etc/ansible/index.html",
+      "destination": "/var/www/html"
+    }
+  tasks:
+  - name: Install {{package1}}
+    yum: name={{package1}} state=latest
+  - name: Install {{package1}}
+    yum: name={{package1}} state=latest
+  - name: Install {{package1}}
+    yum: name={{package1}} state=latest
+  - name: copy index file
+    copy: src={{index_file}} dest={{destination}}
+    notify: service
+  handlers:
+  - name: service
+    service: name={{package1}} state=started
