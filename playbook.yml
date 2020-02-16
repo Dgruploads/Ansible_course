@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: 1. Install httpd.
+    yum: name=httpd state=latest
+  - name: 2. Install git.
+    yum: name=git state=latest
+  - name: 3. Copy the index.html file.
+    copy: src=/etc/ansible/index.html dest=/var/www/html
+  - name: 4. Start the httpd service.
+    service: name=httpd state=started
+  - name: 5. Install docker
+    yum: name=docker state=latest
