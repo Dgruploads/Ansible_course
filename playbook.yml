@@ -13,3 +13,5 @@
     service: name=httpd state=started
   - name: 5. Install docker
     yum: name=docker state=latest
+  - name: 6. Start the docker service.
+    service: name=docker state=started
