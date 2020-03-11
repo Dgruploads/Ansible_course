@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  vars_prompt:
+   - name: package1
+     prompt: "Please specify package1 to install "
+     private: no
+   - name: package2
+     prompt: "Please specify the package2 to install "
+     private: no
+   - name: package3
+     prompt: "Please specify the package3 to install "
+     private: yes
+  tasks:
+  - name: Installing {{package1}}
+    yum: name={{package1}} state=latest
+  - name: Install {{package2}}
+    yum: name={{package2}} state=latest
+  - name: Install {{package3}}
+    yum: name={{package3}} state=latest
