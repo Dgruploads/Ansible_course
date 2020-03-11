@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Check the contents of /etc/ansible folder
+    command: ls /etc/ansible
+    register: output
+  - debug:
+     var: output
+  - name: check git version
+    command: git --version
+    register: version
+  - debug:
+     var: version
