@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks: 
+  - name: Install git
+    yum: name=git state=latest
+    ignore_errors: true
+  - name: Install apache server
+    yum: name=apache2 state=latest
+    ignore_errors: true
+  - name: Install docker
+    yum: name=docker state=latest
+    ignore_errors: true
