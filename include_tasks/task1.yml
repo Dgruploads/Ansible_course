@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: This is the 1st task
+    yum: name=git state=latest
+  - include_tasks: task2.yml
+  - include_tasks: task3.yml
+  - include_tasks: task4.yml
