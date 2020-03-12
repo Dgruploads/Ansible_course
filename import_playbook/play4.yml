@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Running from 4th playbook
+    yum: name=java state=latest 
+  - name: Running again	from 4th playbook
+    copy: src=/etc/ansible/index.html dest=/var/www/html
