@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks: 
+  - name: Install git
+    yum: name=git state=latest
+    ignore_errors: true
+  - name: Install apache server
+    yum: name=apache2 state=latest
+    ignore_errors: true
+  - name: Install docker
+    yum: name=docker state=latest
+    ignore_errors: true
+  - name: Check file1 and file2
+    raw: diff /var/www/html/file1 /var/www/html/file2
+    register: command_result
+    failed_when: command_result.rc == 0 or command_result.rc >= 2
