@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Running from 1st playbook
+    yum: name=git state=latest
+  - name: Running again from 1st playbook
+    yum: name=docker state=latest
+- import_playbook: play2.yml
+- import_playbook: play3.yml
+- import_playbook: play4.yml
