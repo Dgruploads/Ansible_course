@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: This is 1st task
+    yum: name=git state=latest
+    tags: git
+  - name: 2nd task
+    yum: name=docker state=latest
+    tags: git
+  - name: 3rd task
+    yum: name=httpd state=latest
+    tags: git
+  - name: 4th task
+    yum: name=java state=latest
+    tags: java
