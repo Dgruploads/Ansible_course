@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Running from 3rd playbook
+    service: name=docker state=started 
+  - name: Running again	from 3rd playbook
+    service: name=httpd state=started
