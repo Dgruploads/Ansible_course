@@ -1,0 +1,3 @@
+---
+- name: THis is the 4th task
+  yum: name=docker state=latest
