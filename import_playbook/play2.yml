@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Running from 2nd playbook
+    yum: name=mysql state=latest 
+  - name: Running again	from 2nd playbook
+    yum: name=httpd state=latest
