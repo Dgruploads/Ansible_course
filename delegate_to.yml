@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: GIt
+    yum: name=git state=latest
+    delegate_to: 54.80.110.159
+  - name: HTTPD
+    yum: name=httpd state=latest
+    delegate_to: 54.196.133.91
+  - name: Docker
+    yum: name=docker state=latest
+    delegate_to: localhost
