@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Installing {{package1}}
+    yum: name={{package1}} state=latest
+  - name: Installing {{package2}}
+    yum: name={{package2}} state=latest
+  - name: Installing {{package3}}
+    yum: name={{package3}} state=latest
+    
+##ansible-playbook vars.yml --extra-vars '{"package1":"git","package2":"httpd","package3":"docker"}'
