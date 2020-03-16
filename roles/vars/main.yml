@@ -1,0 +1,5 @@
+---
+# vars file for rabi
+file1: "index.html"
+file2: "dockerfile"
+destination: "/var/www/html"
