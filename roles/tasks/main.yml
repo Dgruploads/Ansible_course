@@ -1,0 +1,10 @@
+---
+# tasks file for rabi
+- name: Install git
+  yum: name=git state=latest
+- name: Install docker
+  yum: name=docker state=latest
+- name: Install httpd
+  yum: name=httpd state=latest
+- include_tasks: copy.yml
+- include_tasks: create.yml
