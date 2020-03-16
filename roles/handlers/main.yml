@@ -1,0 +1,6 @@
+---
+# handlers file for rabi
+- name: service
+  service: name=httpd state=started
+- name: docker
+  service: name=docker state=started
