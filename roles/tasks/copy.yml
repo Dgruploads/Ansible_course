@@ -1,0 +1,7 @@
+---
+- name: Copy index.html
+  copy: src={{file1}} dest={{destination}}
+  notify: service
+- name: Copy dockerfile
+  copy: src={{file2}} dest={{destination}}
+  notify: docker
