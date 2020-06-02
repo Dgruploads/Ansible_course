@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Start container with healthstatus
+    docker_container:
+     name: nginx-proxy
+     image: nginx:1.13
+     state: started
+     healthcheck:
+      test: ["CMD", "curl", "--fail", "http://nginx.host.com"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
