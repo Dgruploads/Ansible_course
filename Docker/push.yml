@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Build the image
+    docker_image:
+     name: ansible_image
+     build: path=/etc/ansible/
+  - name: tag the image
+    command: docker tag ansible_image dgruploads/ansible_image
+  - name: Push the image
+    command: docker push dgruploads/ansible_image
