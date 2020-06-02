@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Start a jenkins container
+    docker_container:
+     name: jenkins_container
+     image: jenkins
+     volumes: /data
