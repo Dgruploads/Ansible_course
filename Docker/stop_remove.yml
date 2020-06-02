@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: stop the container
+    docker_container:
+     name: jenkins-container
+     state: stopped
+  - name: remove the container
+    docker_container:
+     name: jenkins-container
+     state: absent
