@@ -5,9 +5,9 @@
   tasks:
   - name: stop the container
     docker_container:
-     name: jenkins-container
+     name: jenkins_container
      state: stopped
   - name: remove the container
     docker_container:
-     name: jenkins-container
+     name: jenkins_container
      state: absent
