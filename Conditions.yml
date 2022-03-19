@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Install package on ubuntu machine
+    apt: name=git state=present
+    when: ansible_os_family == "Debian"
+  - name: Install package on redhat machine
+    yum: name=git state=present
+    when: ansible_os_family == "RedHat"
