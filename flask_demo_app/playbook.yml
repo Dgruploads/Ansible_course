@@ -1,0 +1,54 @@
+---
+- name: Deploy Flask Application
+  hosts: webservers
+  become: yes
+
+  vars:
+    app_user: "flaskuser"
+    app_dir: "/opt/flask-demo-app"
+    git_repo: "https://github.com/yourusername/flask-demo-app.git"
+    app_port: 5000
+
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: ["python3", "python3-pip", "git"]
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Create application user
+      user:
+        name: "{{ app_user }}"
+        system: yes
+        create_home: no
+
+    - name: Clone the repository
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ app_dir }}"
+        version: master
+        force: yes
+
+    - name: Install Python requirements
+      pip:
+        requirements: "{{ app_dir }}/requirements.txt"
+        executable: pip3
+
+    - name: Set up systemd service
+      template:
+        src: flask_app.service.j2
+        dest: /etc/systemd/system/flask_app.service
+      notify:
+        - Reload systemd
+        - Restart Flask app
+
+  handlers:
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Restart Flask app
+      systemd:
+        name: flask_app
+        state: restarted
+        enabled: yes
