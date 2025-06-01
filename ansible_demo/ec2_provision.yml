@@ -1,0 +1,28 @@
+---
+- name: Provision EC2 Instances on AWS
+  hosts: localhost  # Runs on your local machine (or control node)
+  gather_facts: false
+  vars:
+    aws_region: "ap-south-1"
+    instance_type: "t2.micro"
+    ami_id: "ami-0e35ddab05955cf57"
+    key_name: "docker_key"      
+    security_group: "custom_sg" 
+    instance_count: 2           
+    instance_tags:
+      Name: "Ansible-Provisioned"
+      Environment: "Dev"
+      Owner: "DevOps Team"
+
+  tasks:
+    - name: Launch EC2 Instances
+      amazon.aws.ec2_instance:
+        region: "{{ aws_region }}"
+        key_name: "{{ key_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami_id }}"
+        security_group: "{{ security_group }}"
+        count: "{{ instance_count }}"
+        state: present
+        tags: "{{ instance_tags }}"
+        wait: yes
