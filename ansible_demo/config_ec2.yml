@@ -1,0 +1,33 @@
+---
+- name: Configure EC2 Instances on AWS
+  hosts: all
+  become: true
+  become_method: sudo
+
+  tasks:
+  - name: Update all packages (Ubuntu/Debian)
+    apt:
+      upgrade: dist
+      update_cache: yes
+      
+  - name: Install Nginx
+    package:
+      name: nginx
+      state: present
+
+  - name: Ensure Nginx is running and enabled
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: Install Docker
+    package:
+      name: docker.io
+      state: present
+
+  - name: Ensure Docker is running and enabled
+    service:
+      name: docker
+      state: started
+      enabled: yes
