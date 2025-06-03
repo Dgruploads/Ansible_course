@@ -6,7 +6,7 @@
   vars:
     app_user: "flaskuser"
     app_dir: "/opt/flask-demo-app"
-    git_repo: "https://github.com/yourusername/flask-demo-app.git"
+    git_repo: "https://github.com/Dgruploads/flask_demo_app.git"
     app_port: 5000
 
   tasks:
