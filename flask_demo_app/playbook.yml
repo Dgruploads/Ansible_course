@@ -28,6 +28,9 @@
         dest: "{{ app_dir }}"
         version: main
         force: yes
+      notify:
+        - Reload systemd
+        - Restart Flask app
 
     - name: Install Python requirements
       pip:
