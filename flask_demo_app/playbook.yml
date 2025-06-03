@@ -26,7 +26,7 @@
       git:
         repo: "{{ git_repo }}"
         dest: "{{ app_dir }}"
-        version: master
+        version: main
         force: yes
 
     - name: Install Python requirements
