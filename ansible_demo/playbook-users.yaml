@@ -1,0 +1,31 @@
+# playbook-users.yaml
+---
+- name: Manage Application Users
+  hosts: app_servers # Target servers where apps run
+  become: yes         # Need root to manage users/groups
+
+  vars:
+    new_dev_user: "username"
+    dev_group: "devs"
+    your_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCq... username@example.com" # <<--- REPLACE with actual public key
+
+  tasks:
+    - name: Ensure '{{ dev_group }}' group exists
+      ansible.builtin.group:
+        name: "{{ dev_group }}"
+        state: present
+
+    - name: Ensure user '{{ new_dev_user }}' exists and is in '{{ dev_group }}'
+      ansible.builtin.user:
+        name: "{{ new_dev_user }}"
+        groups: "{{ dev_group }}"
+        append: yes # Add to group without removing other groups
+        state: present
+        create_home: yes # Ensure home directory is created
+        shell: /bin/bash # Set preferred shell
+
+    - name: Add '{{ new_dev_user }}'s SSH public key for passwordless login
+      ansible.builtin.authorized_key:
+        user: "{{ new_dev_user }}"
+        state: present
+        key: "{{ your_public_key }}"
